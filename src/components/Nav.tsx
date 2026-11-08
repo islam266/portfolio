@@ -22,7 +22,7 @@ export default function Nav({ locale, d }: { locale: Locale; d: Dict }) {
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2.5">
           <Link
             href={`/${locale}`}
-            className="mono me-auto flex shrink-0 items-center gap-2.5 text-[13px] text-fg"
+            className="display me-auto flex shrink-0 items-center gap-2.5 text-[16px] font-bold text-fg"
           >
             <span
               aria-hidden="true"
@@ -41,7 +41,7 @@ export default function Nav({ locale, d }: { locale: Locale; d: Dict }) {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    className="mono upper inline-flex min-h-[32px] items-center text-[11px] text-muted transition-colors hover:text-accent"
+                    className="display inline-flex min-h-[32px] items-center text-[13.5px] font-medium text-muted transition-colors hover:text-accent-ink"
                   >
                     {label}
                   </a>
@@ -58,7 +58,7 @@ export default function Nav({ locale, d }: { locale: Locale; d: Dict }) {
               lang={other}
               aria-label={ui.otherLanguage}
               title={ui.otherLanguage}
-              className="btn btn-ghost btn-sq mono text-xs"
+              className="btn btn-ghost btn-sq display text-xs font-semibold"
             >
               {other.toUpperCase()}
             </Link>

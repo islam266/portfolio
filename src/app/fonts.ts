@@ -1,13 +1,13 @@
 import {
-  IBM_Plex_Sans_Arabic,
+  Cairo,
   Inter,
   JetBrains_Mono,
-  Space_Grotesk,
+  Poppins,
 } from "next/font/google";
 
 /* Latin faces carry the first paint on both locales, so they are preloaded. */
 
-export const spaceGrotesk = Space_Grotesk({
+export const poppins = Poppins({
   weight: ["500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
@@ -20,27 +20,28 @@ export const inter = Inter({
   variable: "--font-inter",
 });
 
+/* Only the SAP transaction codes are set in mono, so it is not preloaded. */
 export const jetbrains = JetBrains_Mono({
+  weight: ["500"],
   subsets: ["latin"],
   display: "swap",
+  preload: false,
   variable: "--font-jetbrains",
 });
 
-/* The Arabic face is a fallback inside both stacks. It is self-hosted and
-   swapped in as soon as Arabic glyphs render, but not preloaded, so the
-   English page never downloads it. */
-
-export const plexArabic = IBM_Plex_Sans_Arabic({
-  weight: ["400", "500", "600", "700"],
+/* Cairo is the Arabic counterpart to Poppins: same geometric, open feel.
+   Not preloaded, so the English page never downloads it. */
+export const cairo = Cairo({
+  weight: ["400", "600", "700"],
   subsets: ["arabic"],
   display: "swap",
   preload: false,
-  variable: "--font-plex-arabic",
+  variable: "--font-arabic",
 });
 
 export const fontVariables = [
-  spaceGrotesk.variable,
+  poppins.variable,
   inter.variable,
   jetbrains.variable,
-  plexArabic.variable,
+  cairo.variable,
 ].join(" ");

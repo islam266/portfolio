@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 type Props = {
   id: string;
-  /** 1-based position, shown as a monospace index next to the kicker. */
+  /** 1-based position, shown as an accent pill next to the kicker. */
   index: number;
   kicker: string;
   heading: string;

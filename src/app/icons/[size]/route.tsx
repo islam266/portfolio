@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { ACCENT, INK, displayFont } from "@/lib/og-font";
+import { ACCENT, ON_ACCENT, displayFont } from "@/lib/og-font";
 
 const SIZES = ["192", "512"] as const;
 
@@ -32,8 +32,8 @@ export async function GET(
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: INK,
-          color: ACCENT,
+          background: ACCENT,
+          color: ON_ACCENT,
           fontFamily: family,
           // Keep the glyph inside the maskable safe zone (centre 80%).
           fontSize: Math.round(px * 0.46),

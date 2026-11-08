@@ -1,7 +1,15 @@
 import { ImageResponse } from "next/og";
 
 import { D, LOCALES } from "@/content/content";
-import { ACCENT, INK, LINE, MUTED, PAPER, displayFont } from "@/lib/og-font";
+import {
+  ACCENT,
+  INK,
+  LINE,
+  MUTED,
+  ON_ACCENT,
+  PAPER,
+  displayFont,
+} from "@/lib/og-font";
 
 export const alt = "Islam Hamdi Ahmed — SAP PP Business Analyst";
 export const size = { width: 1200, height: 630 };
@@ -19,6 +27,8 @@ export function generateStaticParams() {
 export default async function OpengraphImage() {
   const { family, data } = await displayFont();
   const d = D.en;
+  const words = d.name.split(" ");
+  const last = words.pop() as string;
 
   return new ImageResponse(
     (
@@ -29,55 +39,77 @@ export default async function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: INK,
-          padding: 72,
+          background: PAPER,
+          padding: 70,
+          fontFamily: family,
+          position: "relative",
         }}
       >
         <div
           style={{
+            position: "absolute",
+            top: -180,
+            right: -140,
+            width: 560,
+            height: 560,
+            borderRadius: 999,
+            background: ACCENT,
+            opacity: 0.18,
             display: "flex",
-            alignItems: "center",
-            gap: 14,
-            fontFamily: family,
-            fontSize: 22,
-            color: ACCENT,
           }}
-        >
+        />
+
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <div
-            style={{ display: "flex", width: 10, height: 10, background: ACCENT }}
+            style={{
+              display: "flex",
+              width: 14,
+              height: 14,
+              borderRadius: 999,
+              background: ACCENT,
+            }}
           />
-          islam.hamdi
+          <div style={{ display: "flex", fontSize: 24, color: INK }}>
+            islam.hamdi
+          </div>
         </div>
 
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div
-            style={{ display: "flex", width: 3, background: ACCENT, marginRight: 34 }}
-          />
-          <div style={{ display: "flex", flexDirection: "column" }}>
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 16,
+              fontSize: 82,
+              color: INK,
+              lineHeight: 1.1,
+            }}
+          >
+            <div style={{ display: "flex" }}>{words.join(" ")}</div>
             <div
               style={{
                 display: "flex",
-                fontFamily: family,
-                fontSize: 70,
-                letterSpacing: -2,
-                color: PAPER,
-                lineHeight: 1.15,
+                background: ACCENT,
+                color: ON_ACCENT,
+                borderRadius: 16,
+                padding: "2px 20px 12px",
               }}
             >
-              {d.name}
+              {last}
             </div>
-            <div
-              style={{
-                display: "flex",
-                marginTop: 24,
-                maxWidth: 880,
-                fontSize: 29,
-                lineHeight: 1.45,
-                color: MUTED,
-              }}
-            >
-              {d.role}
-            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginTop: 28,
+              maxWidth: 900,
+              fontSize: 28,
+              lineHeight: 1.45,
+              color: MUTED,
+            }}
+          >
+            {d.role}
           </div>
         </div>
 
@@ -85,10 +117,9 @@ export default async function OpengraphImage() {
           style={{
             display: "flex",
             width: "100%",
-            borderTop: `1px solid ${LINE}`,
+            borderTop: `2px solid ${LINE}`,
             paddingTop: 24,
-            fontFamily: family,
-            fontSize: 19,
+            fontSize: 20,
             color: MUTED,
           }}
         >

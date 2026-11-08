@@ -29,7 +29,7 @@ export default function ExperienceCarousel({ exp, of, rtl, labels }: Props) {
         className="grid grid-cols-[260px_1fr] items-start gap-12 max-[820px]:grid-cols-1 max-[820px]:gap-6"
       >
         <div>
-          <p className="mono text-[13px]" style={{ color: "var(--accent)" }}>
+          <p className="display text-[14px] font-semibold" style={{ color: "var(--accent-ink)" }}>
             {item.y}
           </p>
           <h3 className="display upper mt-3 text-[22px] leading-tight">
@@ -87,7 +87,7 @@ export default function ExperienceCarousel({ exp, of, rtl, labels }: Props) {
 
         <p
           dir="ltr"
-          className="mono text-xs text-muted"
+          className="display text-xs font-semibold text-muted"
           aria-hidden="true"
         >
           {pad(index + 1)} / {pad(total)}

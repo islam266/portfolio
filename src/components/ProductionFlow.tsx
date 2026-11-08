@@ -71,10 +71,10 @@ export default function ProductionFlow({ flow, note, rtl, labels }: Props) {
               style={{
                 background: active ? "var(--accent-soft)" : "transparent",
                 borderColor: active ? "var(--accent)" : "var(--line)",
-                color: active ? "var(--accent)" : "var(--muted)",
+                color: active ? "var(--accent-ink)" : "var(--muted)",
               }}
             >
-              <span className="mono text-[11px]">{pad(i + 1)}</span>
+              <span className="display text-[12px] font-bold opacity-70">{pad(i + 1)}</span>
               <span>{item.n}</span>
             </button>
           );
@@ -109,7 +109,7 @@ export default function ProductionFlow({ flow, note, rtl, labels }: Props) {
       </div>
 
       <div className="mt-5 flex flex-wrap items-center gap-4">
-        <p className="mono text-[11px] leading-snug text-muted">{note}</p>
+        <p className="text-[13px] leading-snug text-muted">{note}</p>
         <div className="ms-auto flex gap-2">
           <button
             type="button"

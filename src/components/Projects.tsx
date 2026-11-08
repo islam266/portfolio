@@ -8,7 +8,7 @@ function ProjectCard({ project }: { project: Project }) {
       {/* TODO: image hook — when a screenshot exists, render it here as a
           next/image above the status row (16:9, rounded 3px, border --line)
           and add the file to /public. No placeholder is rendered until then. */}
-      <p className="mono flex items-center gap-2 text-[11px] text-muted">
+      <p className="label flex items-center gap-2 text-[11px] text-muted">
         <span className="dot" style={{ background: project.c }} />
         {project.s}
       </p>

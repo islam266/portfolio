@@ -25,6 +25,14 @@ function resolveSiteUrl(): string {
 
 export const SITE_URL = resolveSiteUrl();
 
+/**
+ * Portrait shown in the hero. Set this once the image file is in /public —
+ * e.g. { src: "/portrait.jpg", width: 1200, height: 1500 }. While it is null
+ * the hero renders as a single text column, with no placeholder.
+ */
+export const PHOTO: { src: string; width: number; height: number } | null =
+  null;
+
 export const META: Record<Locale, { title: string; ogLocale: string }> = {
   en: {
     title: "Islam Hamdi Ahmed | SAP PP Business Analyst",

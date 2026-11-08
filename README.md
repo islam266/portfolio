@@ -6,13 +6,18 @@ animation libraries, no backend, no contact form.
 
 - `/` redirects to `/en`
 - `/en` and `/ar` are fully static, prerendered at build time
-- Dark theme by default, light theme via the `◐` toggle (next-themes)
+- Light theme by default, dark theme via the `◐` toggle (next-themes)
 
-Visual direction: cool slate with a single electric-blue accent, Space Grotesk
-for display, Inter for body, JetBrains Mono for labels and tokens, and IBM Plex
-Sans Arabic for Arabic. Every colour is a token in
-[`globals.css`](src/app/globals.css) — `:root` is dark, `[data-theme="light"]`
+Visual direction follows a light, turquoise business-portfolio style: pale blue
+base, a single turquoise accent, bold Poppins headings with an accent block
+behind the key word, pill badges and chips, and soft rounded cards. Cairo
+carries the Arabic. Every colour is a token in
+[`globals.css`](src/app/globals.css) — `:root` is light, `[data-theme="dark"]`
 overrides it — so a palette change means editing one block.
+
+`--accent` is the bright turquoise used for fills and blocks; `--accent-ink` is
+the darker reading version used whenever the accent carries text, so both
+themes clear AA contrast.
 
 ## Run locally
 
@@ -65,6 +70,13 @@ The Open Graph card is English on both locales. The image renderer behind
 `ImageResponse` lays glyphs out without the bidi algorithm, so Arabic comes
 out with its words in reverse order; an English card is the honest option.
 
+### Adding the portrait
+
+The hero renders a portrait beside the name as soon as one exists. Put the
+image in `public/` and set `PHOTO` in [`src/lib/site.ts`](src/lib/site.ts), for
+example `{ src: "/portrait.jpg", width: 1200, height: 1500 }`. While `PHOTO` is
+`null` the hero is a single text column and no placeholder is drawn.
+
 ### Adding a project screenshot later
 
 `src/components/Projects.tsx` has a commented `TODO: image hook` inside the
@@ -87,7 +99,7 @@ src/
   components/          one file per section, "use client" only where needed
   content/content.ts   all copy, both languages
   lib/                 site URL, UI labels, bidi helper, image fonts
-assets/                Space Mono Bold (SIL OFL), used by the generated
+assets/                Poppins Bold (SIL OFL), used by the generated
                        icons and the Open Graph card
 tests/qa.spec.ts       Playwright QA suite
 ```

@@ -1,35 +1,41 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------
-   Design tokens. :root is the dark theme (the default).
-   [data-theme="light"] overrides it. next-themes writes the attribute.
+   Design tokens. :root is the light theme (the default here).
+   [data-theme="dark"] overrides it. next-themes writes the attribute.
+
+   --accent is the brand turquoise, used for fills, blocks and shapes.
+   --accent-ink is the darker reading version, used whenever the accent
+   carries text, so both themes clear AA contrast.
 --------------------------------------------------------------- */
 :root {
-  --bg: #080b12;
-  --bg2: #0c111a;
-  --card: #0f151f;
-  --fg: #e4eaf4;
-  --muted: #8491a8;
-  --line: #1b2432;
-  --accent: #4ea8ff;
-  --accent-soft: #0d1f33;
-  --nav: #080b12cc;
-  --grid: #e4eaf409;
-  --glow: 12%;
+  --bg: #f2f8fb;
+  --bg2: #e7f2f7;
+  --card: #ffffff;
+  --fg: #0f1b24;
+  --muted: #5c6b78;
+  --line: #dbe8ef;
+  --accent: #17c3d6;
+  --accent-ink: #0a7686;
+  --accent-soft: #dcf5f9;
+  --on-accent: #04212a;
+  --nav: #f2f8fbd9;
+  --shadow: 0 18px 40px -28px rgba(15, 27, 36, 0.35);
 }
 
-[data-theme="light"] {
-  --bg: #f7f9fc;
-  --bg2: #eef2f8;
-  --card: #ffffff;
-  --fg: #0d1521;
-  --muted: #566076;
-  --line: #dde4ee;
-  --accent: #0b63c7;
-  --accent-soft: #e6effb;
-  --nav: #f7f9fcd9;
-  --grid: #0d15210c;
-  --glow: 8%;
+[data-theme="dark"] {
+  --bg: #071319;
+  --bg2: #0b1a21;
+  --card: #0e2029;
+  --fg: #e6f1f5;
+  --muted: #8fa5ae;
+  --line: #16303a;
+  --accent: #2ad4e6;
+  --accent-ink: #2ad4e6;
+  --accent-soft: #0d2b34;
+  --on-accent: #04212a;
+  --nav: #071319d9;
+  --shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.75);
 }
 
 @theme inline {
@@ -40,20 +46,21 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
-  --color-nav: var(--nav);
 
-  --font-sans: var(--font-inter), var(--font-plex-arabic), system-ui, sans-serif;
-  --font-display: var(--font-display), var(--font-plex-arabic), system-ui,
-    sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
+  --font-sans: var(--font-inter), var(--font-arabic), system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-arabic), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --radius-card: 18px;
 }
 
 /* ---------------------------------------------------------------
    Base
 --------------------------------------------------------------- */
 html {
-  scroll-padding-top: 80px;
+  scroll-padding-top: 88px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
@@ -63,64 +70,66 @@ body {
   background-color: var(--bg);
   background-image:
     radial-gradient(
-      900px 420px at 50% -140px,
-      color-mix(in srgb, var(--accent) var(--glow), transparent),
+      620px 420px at 88% -60px,
+      color-mix(in srgb, var(--accent) 22%, transparent),
       transparent 70%
     ),
-    linear-gradient(to right, var(--grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-  background-size:
-    100% 760px,
-    32px 32px,
-    32px 32px;
-  background-repeat: no-repeat, repeat, repeat;
+    radial-gradient(
+      520px 360px at 2% 320px,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      transparent 70%
+    );
+  background-repeat: no-repeat, no-repeat;
   font-family: var(--font-sans);
-  font-size: 15px;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--accent-ink);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 h1,
 h2,
 .display {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: clamp(40px, 7.4vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(38px, 6.4vw, 76px);
+  line-height: 1.06;
 }
 
 h2 {
-  font-size: clamp(28px, 4.2vw, 46px);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  font-size: clamp(27px, 3.9vw, 44px);
+  line-height: 1.15;
   max-width: 20ch;
   text-wrap: balance;
 }
 
-/* Arabic needs more leading than the Latin display face, and no tracking. */
-[dir="rtl"] h1 {
+/* Arabic needs more leading, and no negative tracking. */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] .display {
   letter-spacing: 0;
-  line-height: 1.3;
+}
+
+[dir="rtl"] h1 {
+  line-height: 1.35;
 }
 
 [dir="rtl"] h2 {
-  letter-spacing: 0;
   line-height: 1.5;
   max-width: 24ch;
 }
@@ -129,25 +138,34 @@ h2 {
   line-height: 1.55;
 }
 
+/* The template's signature: a solid accent block behind a key word. */
+.mark {
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 0.02em 0.22em 0.1em;
+  border-radius: 8px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
 /* ---------------------------------------------------------------
    Layout primitives
 --------------------------------------------------------------- */
 .wrap {
   width: 100%;
-  max-width: 1152px;
+  max-width: 1180px;
   margin-inline: auto;
-  padding-left: max(16px, env(safe-area-inset-left));
-  padding-right: max(16px, env(safe-area-inset-right));
+  padding-left: max(18px, env(safe-area-inset-left));
+  padding-right: max(18px, env(safe-area-inset-right));
 }
 
 .section {
-  padding-block: 96px;
-  border-block-start: 1px solid var(--line);
+  padding-block: 104px;
 }
 
 @media (max-width: 640px) {
   .section {
-    padding-block: 48px;
+    padding-block: 52px;
   }
 }
 
@@ -156,35 +174,60 @@ h2 {
 }
 
 /* ---------------------------------------------------------------
-   Kickers / labels
+   Labels
 --------------------------------------------------------------- */
+.label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+[dir="rtl"] .label {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--muted);
+  letter-spacing: 0.12em;
+  color: var(--accent-ink);
 }
 
 .kicker .num {
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 24px;
+  padding-inline: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 12px;
+  letter-spacing: 0;
 }
 
 .kicker .tick {
-  width: 22px;
-  height: 1px;
-  background: var(--line);
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--accent);
   flex: none;
 }
 
 .kicker-dot::before {
   content: "";
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
   background: var(--accent);
   flex: none;
 }
@@ -194,8 +237,10 @@ h2 {
   letter-spacing: 0;
 }
 
-.mono {
-  font-family: var(--font-mono);
+/* Keep Latin-only fragments (T-codes, ".NET 8", "10–15%") intact in Arabic. */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .upper {
@@ -208,12 +253,6 @@ h2 {
   letter-spacing: 0;
 }
 
-/* Keep Latin-only fragments (T-codes, ".NET 8", "10–15%") intact in Arabic. */
-.ltr {
-  direction: ltr;
-  unicode-bidi: isolate;
-}
-
 /* ---------------------------------------------------------------
    Buttons
 --------------------------------------------------------------- */
@@ -222,31 +261,34 @@ h2 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 42px;
-  padding: 10px 18px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  font-size: 13.5px;
-  font-weight: 500;
+  min-height: 46px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: -0.01em;
   cursor: pointer;
   transition:
     background-color 0.18s ease,
     border-color 0.18s ease,
     color 0.18s ease,
-    box-shadow 0.18s ease;
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
 }
 
 .btn-primary {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent);
   border-color: var(--accent);
+  box-shadow: 0 10px 24px -14px color-mix(in srgb, var(--accent) 90%, transparent);
 }
 
 .btn-primary:hover {
-  background: color-mix(in srgb, var(--accent) 85%, var(--fg));
-  border-color: color-mix(in srgb, var(--accent) 85%, var(--fg));
+  background: color-mix(in srgb, var(--accent) 82%, var(--fg));
+  border-color: color-mix(in srgb, var(--accent) 82%, var(--fg));
+  transform: translateY(-1px);
 }
 
 .btn-ghost {
@@ -257,13 +299,13 @@ h2 {
 
 .btn-ghost:hover {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
   background: var(--accent-soft);
 }
 
 .btn-sq {
-  min-width: 42px;
-  padding-inline: 10px;
+  min-width: 46px;
+  padding-inline: 12px;
 }
 
 /* ---------------------------------------------------------------
@@ -274,22 +316,8 @@ h2 {
   position: relative;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 4px;
-}
-
-/* Corner tick: a hairline bracket that lights up on hover. */
-.card::before {
-  content: "";
-  position: absolute;
-  inset-block-start: -1px;
-  inset-inline-start: -1px;
-  width: 14px;
-  height: 14px;
-  border-block-start: 1px solid var(--accent);
-  border-inline-start: 1px solid var(--accent);
-  border-start-start-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow);
 }
 
 .card {
@@ -300,13 +328,26 @@ h2 {
 }
 
 .card:hover {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  transform: translateY(-2px);
-  box-shadow: 0 14px 34px -22px color-mix(in srgb, var(--accent) 70%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+  transform: translateY(-4px);
+  box-shadow: 0 26px 48px -28px color-mix(in srgb, var(--accent) 75%, transparent);
 }
 
-.card:hover::before {
-  opacity: 1;
+/* Rounded photo frame with an accent shape sitting behind it. */
+.photo-frame {
+  position: relative;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  box-shadow: var(--shadow);
+}
+
+.photo-blob {
+  position: absolute;
+  border-radius: 32px;
+  background: var(--accent);
+  opacity: 0.9;
 }
 
 /* ---------------------------------------------------------------
@@ -315,11 +356,11 @@ h2 {
 .chip {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12.5px;
+  font-weight: 500;
   line-height: 1;
-  padding: 7px 9px;
-  border-radius: 3px;
+  padding: 9px 13px;
+  border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--muted);
   background: var(--bg2);
@@ -330,34 +371,36 @@ h2 {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 12.5px;
+  font-weight: 500;
   line-height: 1;
-  padding: 8px 10px;
-  border-radius: 3px;
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-ink);
   white-space: nowrap;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 7px 10px;
-  border-radius: 3px;
+  padding: 9px 14px;
+  border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--muted);
-  background: var(--bg2);
+  background: var(--card);
 }
 
 .badge-accent {
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-  color: var(--accent);
-  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--on-accent);
+  background: var(--accent);
 }
 
 [dir="rtl"] .badge {
@@ -369,8 +412,8 @@ h2 {
    Ticker
 --------------------------------------------------------------- */
 .ticker {
-  background: var(--bg2);
-  border-top: 1px solid var(--line);
+  background: var(--accent);
+  color: var(--on-accent);
   overflow: hidden;
 }
 
@@ -378,7 +421,7 @@ h2 {
   display: flex;
   width: max-content;
   align-items: center;
-  padding-block: 13px;
+  padding-block: 15px;
   animation: ticker-scroll 40s linear infinite;
 }
 
@@ -391,8 +434,8 @@ h2 {
 .ticker-item {
   display: flex;
   align-items: center;
-  gap: 22px;
-  padding-inline-end: 22px;
+  gap: 26px;
+  padding-inline-end: 26px;
 }
 
 @keyframes ticker-scroll {
@@ -417,8 +460,9 @@ h2 {
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
   flex: none;
 }
 
@@ -437,7 +481,8 @@ h2 {
     animation: none;
   }
 
-  .card:hover {
+  .card:hover,
+  .btn-primary:hover {
     transform: none;
   }
 

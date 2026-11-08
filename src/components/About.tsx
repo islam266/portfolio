@@ -26,7 +26,7 @@ export default function About({ d }: { d: Dict }) {
                 style={{ borderInlineStartColor: "var(--line)" }}
               >
                 <p className="text-[15px] leading-snug">{title}</p>
-                <p className="mono mt-1.5 text-[11px] leading-snug text-muted">
+                <p className="mt-1.5 text-[13px] leading-snug text-muted">
                   {meta}
                 </p>
               </li>

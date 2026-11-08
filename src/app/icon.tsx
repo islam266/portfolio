@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { ACCENT, INK, displayFont } from "@/lib/og-font";
+import { ACCENT, ON_ACCENT, displayFont } from "@/lib/og-font";
 
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
@@ -17,8 +17,8 @@ export default async function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: INK,
-          color: ACCENT,
+          background: ACCENT,
+          color: ON_ACCENT,
           fontFamily: family,
           fontSize: 44,
           lineHeight: 1,
