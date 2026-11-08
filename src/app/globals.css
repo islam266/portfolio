@@ -60,9 +60,17 @@
    Base
 --------------------------------------------------------------- */
 html {
-  scroll-padding-top: 88px;
+  /* Must stay >= the sticky nav's height, or an anchored heading lands
+     underneath it. The nav wraps to two rows below the sm breakpoint. */
+  scroll-padding-top: 96px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+}
+
+@media (max-width: 639px) {
+  html {
+    scroll-padding-top: 124px;
+  }
 }
 
 body {

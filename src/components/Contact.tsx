@@ -40,7 +40,7 @@ export default function Contact({
 
       <a
         href={`mailto:${EMAIL}`}
-        className="display ltr mt-8 inline-block text-[clamp(22px,4.4vw,40px)] leading-tight break-words transition-colors hover:text-accent-ink"
+        className="display ltr mt-8 inline-block py-2 text-[clamp(22px,4.4vw,40px)] leading-tight break-words transition-colors hover:text-accent-ink"
       >
         {EMAIL}
       </a>

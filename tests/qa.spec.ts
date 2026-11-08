@@ -136,6 +136,48 @@ for (const locale of LOCALES) {
   }
 }
 
+for (const locale of LOCALES) {
+  test(`phone: touch targets and anchor offset · ${locale}`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/${locale}`, { waitUntil: "load" });
+    await page.evaluate(() => document.fonts.ready.then(() => true));
+
+    const result = await page.evaluate(() => {
+      const small = [
+        ...document.querySelectorAll('a, button, [role="tab"]'),
+      ]
+        .map((el) => ({
+          rect: el.getBoundingClientRect(),
+          name: (
+            el.textContent ||
+            el.getAttribute("aria-label") ||
+            el.tagName
+          )
+            .trim()
+            .slice(0, 24),
+        }))
+        .filter(
+          (x) => x.rect.width > 0 && x.rect.height > 0 && x.rect.height < 40,
+        )
+        .map((x) => `${x.name} (${Math.round(x.rect.height)}px)`);
+
+      const navHeight =
+        document.querySelector("header")?.getBoundingClientRect().height ?? 0;
+      const scrollPadding = parseFloat(
+        getComputedStyle(document.documentElement).scrollPaddingTop,
+      );
+
+      return { small: [...new Set(small)], navHeight, scrollPadding };
+    });
+
+    expect(result.small, "touch targets under 40px tall").toEqual([]);
+    expect(
+      result.scrollPadding,
+      `scroll-padding-top (${result.scrollPadding}) must clear the sticky nav (${result.navHeight})`,
+    ).toBeGreaterThanOrEqual(result.navHeight);
+  });
+}
+
 test("keyboard: tab order, focus rings, buttons and flow tabs", async ({
   page,
 }) => {
