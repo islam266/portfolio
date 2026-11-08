@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { GOLD, INK, serifFont } from "@/lib/og-font";
+import { ACCENT, INK, displayFont } from "@/lib/og-font";
 
 const SIZES = ["192", "512"] as const;
 
@@ -21,7 +21,7 @@ export async function GET(
     return new Response("Not found", { status: 404 });
   }
 
-  const { family, data } = await serifFont();
+  const { family, data } = await displayFont();
 
   return new ImageResponse(
     (
@@ -33,7 +33,7 @@ export async function GET(
           alignItems: "center",
           justifyContent: "center",
           background: INK,
-          color: GOLD,
+          color: ACCENT,
           fontFamily: family,
           // Keep the glyph inside the maskable safe zone (centre 80%).
           fontSize: Math.round(px * 0.46),
@@ -47,7 +47,7 @@ export async function GET(
       width: px,
       height: px,
       fonts: [
-        { name: family, data, style: "normal", weight: 400 },
+        { name: family, data, style: "normal", weight: 700 },
       ],
     },
   );

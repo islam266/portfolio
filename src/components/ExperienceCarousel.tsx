@@ -29,10 +29,10 @@ export default function ExperienceCarousel({ exp, of, rtl, labels }: Props) {
         className="grid grid-cols-[260px_1fr] items-start gap-12 max-[820px]:grid-cols-1 max-[820px]:gap-6"
       >
         <div>
-          <p className="mono text-[13px]" style={{ color: "var(--gold)" }}>
+          <p className="mono text-[13px]" style={{ color: "var(--accent)" }}>
             {item.y}
           </p>
-          <h3 className="serif upper mt-3 text-[22px] leading-tight">
+          <h3 className="display upper mt-3 text-[22px] leading-tight">
             {item.t}
           </h3>
           <p className="mt-2.5 text-[13px] leading-snug text-muted">{item.o}</p>
@@ -51,7 +51,7 @@ export default function ExperienceCarousel({ exp, of, rtl, labels }: Props) {
               <span
                 aria-hidden="true"
                 className="mt-[9px] h-px w-3 shrink-0"
-                style={{ background: "var(--gold)" }}
+                style={{ background: "var(--accent)" }}
               />
               <span className="max-w-[72ch] leading-relaxed text-muted">
                 {bullet}
@@ -77,7 +77,7 @@ export default function ExperienceCarousel({ exp, of, rtl, labels }: Props) {
                 style={{
                   background:
                     i === index
-                      ? "var(--gold)"
+                      ? "var(--accent)"
                       : "color-mix(in srgb, var(--muted) 55%, transparent)",
                 }}
               />

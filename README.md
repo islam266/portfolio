@@ -8,6 +8,12 @@ animation libraries, no backend, no contact form.
 - `/en` and `/ar` are fully static, prerendered at build time
 - Dark theme by default, light theme via the `◐` toggle (next-themes)
 
+Visual direction: cool slate with a single electric-blue accent, Space Grotesk
+for display, Inter for body, JetBrains Mono for labels and tokens, and IBM Plex
+Sans Arabic for Arabic. Every colour is a token in
+[`globals.css`](src/app/globals.css) — `:root` is dark, `[data-theme="light"]`
+overrides it — so a palette change means editing one block.
+
 ## Run locally
 
 ```bash
@@ -81,7 +87,7 @@ src/
   components/          one file per section, "use client" only where needed
   content/content.ts   all copy, both languages
   lib/                 site URL, UI labels, bidi helper, image fonts
-assets/                DM Serif Display (SIL OFL), used by the generated
+assets/                Space Mono Bold (SIL OFL), used by the generated
                        icons and the Open Graph card
 tests/qa.spec.ts       Playwright QA suite
 ```

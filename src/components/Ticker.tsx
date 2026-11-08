@@ -9,14 +9,14 @@ export default function Ticker({ d }: { d: Dict }) {
       <div className="ticker-track">
         {words.map((word, i) => (
           <span key={`${word}-${i}`} className="ticker-item">
-            <span className="mono text-[13px] whitespace-nowrap text-muted">
+            <span className="mono upper text-[11px] whitespace-nowrap text-muted">
               {word}
             </span>
             <span
-              className="text-[10px] leading-none"
-              style={{ color: "var(--gold)" }}
+              className="mono text-[12px] leading-none"
+              style={{ color: "var(--accent)" }}
             >
-              ◆
+              /
             </span>
           </span>
         ))}

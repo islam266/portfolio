@@ -22,8 +22,13 @@ export default function Nav({ locale, d }: { locale: Locale; d: Dict }) {
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1 py-2.5">
           <Link
             href={`/${locale}`}
-            className="mono me-auto shrink-0 text-sm text-fg"
+            className="mono me-auto flex shrink-0 items-center gap-2.5 text-[13px] text-fg"
           >
+            <span
+              aria-hidden="true"
+              className="dot"
+              style={{ background: "var(--accent)" }}
+            />
             islam.hamdi
           </Link>
 
@@ -36,7 +41,7 @@ export default function Nav({ locale, d }: { locale: Locale; d: Dict }) {
                 <li key={id}>
                   <a
                     href={`#${id}`}
-                    className="inline-flex min-h-[32px] items-center text-[13px] text-muted transition-colors hover:text-gold"
+                    className="mono upper inline-flex min-h-[32px] items-center text-[11px] text-muted transition-colors hover:text-accent"
                   >
                     {label}
                   </a>

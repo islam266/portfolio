@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 
-import { GOLD, INK, serifFont } from "@/lib/og-font";
+import { ACCENT, INK, displayFont } from "@/lib/og-font";
 
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
 export default async function Icon() {
-  const { family, data } = await serifFont();
+  const { family, data } = await displayFont();
 
   return new ImageResponse(
     (
@@ -18,7 +18,7 @@ export default async function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: INK,
-          color: GOLD,
+          color: ACCENT,
           fontFamily: family,
           fontSize: 44,
           lineHeight: 1,
@@ -30,7 +30,7 @@ export default async function Icon() {
     {
       ...size,
       fonts: [
-        { name: family, data, style: "normal", weight: 400 },
+        { name: family, data, style: "normal", weight: 700 },
       ],
     },
   );

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-/** Fixed 2px gold bar at the very top; width tracks scroll percentage. */
+/** Fixed 2px accent bar at the very top; width tracks scroll percentage. */
 export default function ProgressBar() {
   const [percent, setPercent] = useState(0);
 
@@ -32,7 +32,7 @@ export default function ProgressBar() {
         insetInlineStart: 0,
         height: 2,
         width: `${percent}%`,
-        background: "var(--gold)",
+        background: "var(--accent)",
         zIndex: 60,
         pointerEvents: "none",
       }}

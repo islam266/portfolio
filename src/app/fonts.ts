@@ -1,18 +1,17 @@
 import {
-  Amiri,
-  DM_Serif_Display,
   IBM_Plex_Sans_Arabic,
   Inter,
   JetBrains_Mono,
+  Space_Grotesk,
 } from "next/font/google";
 
 /* Latin faces carry the first paint on both locales, so they are preloaded. */
 
-export const dmSerif = DM_Serif_Display({
-  weight: "400",
+export const spaceGrotesk = Space_Grotesk({
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-dm-serif",
+  variable: "--font-display",
 });
 
 export const inter = Inter({
@@ -27,30 +26,21 @@ export const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-/* Arabic faces are fallbacks inside the stacks. They are self-hosted and
-   swapped in as soon as Arabic glyphs are rendered, but not preloaded, so the
-   English page never downloads them. */
+/* The Arabic face is a fallback inside both stacks. It is self-hosted and
+   swapped in as soon as Arabic glyphs render, but not preloaded, so the
+   English page never downloads it. */
 
 export const plexArabic = IBM_Plex_Sans_Arabic({
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   subsets: ["arabic"],
   display: "swap",
   preload: false,
   variable: "--font-plex-arabic",
 });
 
-export const amiri = Amiri({
-  weight: ["400", "700"],
-  subsets: ["arabic"],
-  display: "swap",
-  preload: false,
-  variable: "--font-amiri",
-});
-
 export const fontVariables = [
-  dmSerif.variable,
+  spaceGrotesk.variable,
   inter.variable,
   jetbrains.variable,
   plexArabic.variable,
-  amiri.variable,
 ].join(" ");

@@ -69,9 +69,9 @@ export default function ProductionFlow({ flow, note, rtl, labels }: Props) {
               onClick={() => select(i)}
               className="btn shrink-0"
               style={{
-                background: active ? "var(--gold-soft)" : "transparent",
-                borderColor: active ? "var(--gold)" : "var(--line)",
-                color: active ? "var(--gold)" : "var(--muted)",
+                background: active ? "var(--accent-soft)" : "transparent",
+                borderColor: active ? "var(--accent)" : "var(--line)",
+                color: active ? "var(--accent)" : "var(--muted)",
               }}
             >
               <span className="mono text-[11px]">{pad(i + 1)}</span>
@@ -88,7 +88,7 @@ export default function ProductionFlow({ flow, note, rtl, labels }: Props) {
         tabIndex={0}
         className="panel mt-6 p-7 max-sm:p-5"
       >
-        <h3 className="serif text-[26px] leading-tight max-sm:text-[22px]">
+        <h3 className="display text-[26px] leading-tight max-sm:text-[22px]">
           {step.n}
         </h3>
         <p className="mt-3 max-w-[66ch] leading-relaxed text-muted">{step.d}</p>

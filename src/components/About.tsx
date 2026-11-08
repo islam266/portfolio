@@ -3,7 +3,7 @@ import Section from "./Section";
 
 export default function About({ d }: { d: Dict }) {
   return (
-    <Section id="about" kicker={d.k_about} heading={d.h_about}>
+    <Section id="about" index={1} kicker={d.k_about} heading={d.h_about}>
       <div className="grid grid-cols-[1.2fr_1fr] items-start gap-12 max-[820px]:grid-cols-1 max-[820px]:gap-8">
         <div className="space-y-5 text-start">
           {d.about.map((paragraph) => (
@@ -17,7 +17,7 @@ export default function About({ d }: { d: Dict }) {
         </div>
 
         <div className="panel p-6 max-sm:p-5">
-          <h3 className="kicker">{d.cert_h}</h3>
+          <h3 className="kicker kicker-dot">{d.cert_h}</h3>
           <ul className="mt-5 space-y-4">
             {d.certs.map(([title, meta]) => (
               <li

@@ -5,33 +5,31 @@
    [data-theme="light"] overrides it. next-themes writes the attribute.
 --------------------------------------------------------------- */
 :root {
-  --bg: #0b1120;
-  --bg2: #0f172a;
-  --card: #111a2e;
-  --fg: #dce6f0;
-  --muted: #8e9bb3;
-  --line: #1f2a44;
-  --gold: #e4b976;
-  --gold-soft: #2a2314;
-  --nav: #0b1120cc;
-  --grid: #dce6f00a;
-
-  --status-shipped: #3ecf8e;
-  --status-live: #e4b976;
-  --status-progress: #7aa2f7;
+  --bg: #080b12;
+  --bg2: #0c111a;
+  --card: #0f151f;
+  --fg: #e4eaf4;
+  --muted: #8491a8;
+  --line: #1b2432;
+  --accent: #4ea8ff;
+  --accent-soft: #0d1f33;
+  --nav: #080b12cc;
+  --grid: #e4eaf409;
+  --glow: 12%;
 }
 
 [data-theme="light"] {
-  --bg: #f4f1ea;
-  --bg2: #ebe7dd;
+  --bg: #f7f9fc;
+  --bg2: #eef2f8;
   --card: #ffffff;
-  --fg: #17202e;
-  --muted: #5b6578;
-  --line: #d8d3c6;
-  --gold: #8a5a12;
-  --gold-soft: #f0e2c4;
-  --nav: #fffcf5cc;
-  --grid: #17202e0d;
+  --fg: #0d1521;
+  --muted: #566076;
+  --line: #dde4ee;
+  --accent: #0b63c7;
+  --accent-soft: #e6effb;
+  --nav: #f7f9fcd9;
+  --grid: #0d15210c;
+  --glow: 8%;
 }
 
 @theme inline {
@@ -41,12 +39,13 @@
   --color-fg: var(--fg);
   --color-muted: var(--muted);
   --color-line: var(--line);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
   --color-nav: var(--nav);
 
   --font-sans: var(--font-inter), var(--font-plex-arabic), system-ui, sans-serif;
-  --font-serif: var(--font-dm-serif), var(--font-amiri), Georgia, serif;
+  --font-display: var(--font-display), var(--font-plex-arabic), system-ui,
+    sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", monospace;
 }
 
@@ -63,55 +62,67 @@ body {
   color: var(--fg);
   background-color: var(--bg);
   background-image:
+    radial-gradient(
+      900px 420px at 50% -140px,
+      color-mix(in srgb, var(--accent) var(--glow), transparent),
+      transparent 70%
+    ),
     linear-gradient(to right, var(--grid) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
-  background-size: 56px 56px;
-  background-attachment: fixed;
+  background-size:
+    100% 760px,
+    32px 32px,
+    32px 32px;
+  background-repeat: no-repeat, repeat, repeat;
   font-family: var(--font-sans);
+  font-size: 15px;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 
 ::selection {
-  background: var(--gold);
+  background: var(--accent);
   color: var(--bg);
 }
 
 :focus-visible {
-  outline: 2px solid var(--gold);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 2px;
 }
 
 h1,
 h2,
-.serif {
-  font-family: var(--font-serif);
-  font-weight: 400;
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
 }
 
 h1 {
-  font-size: clamp(44px, 8vw, 92px);
-  line-height: 1;
-  letter-spacing: -0.01em;
+  font-size: clamp(40px, 7.4vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: clamp(32px, 5vw, 56px);
-  line-height: 1.08;
-  max-width: 18ch;
+  font-size: clamp(28px, 4.2vw, 46px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  max-width: 20ch;
   text-wrap: balance;
 }
 
-/* Arabic needs more leading than the Latin display face and no tracking. */
+/* Arabic needs more leading than the Latin display face, and no tracking. */
 [dir="rtl"] h1 {
   letter-spacing: 0;
   line-height: 1.3;
 }
 
 [dir="rtl"] h2 {
-  line-height: 1.45;
-  max-width: 22ch;
+  letter-spacing: 0;
+  line-height: 1.5;
+  max-width: 24ch;
 }
 
 [dir="rtl"] h3 {
@@ -130,12 +141,13 @@ h2 {
 }
 
 .section {
-  padding-block: 88px;
+  padding-block: 96px;
+  border-block-start: 1px solid var(--line);
 }
 
 @media (max-width: 640px) {
   .section {
-    padding-block: 40px;
+    padding-block: 48px;
   }
 }
 
@@ -149,20 +161,32 @@ h2 {
 .kicker {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   color: var(--muted);
 }
 
-.kicker::before {
-  content: "•";
-  color: var(--gold);
-  font-size: 14px;
-  line-height: 1;
+.kicker .num {
+  color: var(--accent);
+}
+
+.kicker .tick {
+  width: 22px;
+  height: 1px;
+  background: var(--line);
+  flex: none;
+}
+
+.kicker-dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  flex: none;
 }
 
 [dir="rtl"] .kicker {
@@ -176,7 +200,7 @@ h2 {
 
 .upper {
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
 }
 
 [dir="rtl"] .upper {
@@ -184,7 +208,7 @@ h2 {
   letter-spacing: 0;
 }
 
-/* Keep SAP transaction codes left-to-right inside Arabic text. */
+/* Keep Latin-only fragments (T-codes, ".NET 8", "10–15%") intact in Arabic. */
 .ltr {
   direction: ltr;
   unicode-bidi: isolate;
@@ -200,26 +224,29 @@ h2 {
   gap: 8px;
   min-height: 42px;
   padding: 10px 18px;
-  border-radius: 3px;
+  border-radius: 4px;
   border: 1px solid transparent;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 500;
   line-height: 1.2;
+  letter-spacing: -0.01em;
   cursor: pointer;
   transition:
     background-color 0.18s ease,
     border-color 0.18s ease,
-    color 0.18s ease;
+    color 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .btn-primary {
-  background: var(--fg);
+  background: var(--accent);
   color: var(--bg);
+  border-color: var(--accent);
 }
 
 .btn-primary:hover {
-  background: var(--gold);
-  color: var(--bg);
+  background: color-mix(in srgb, var(--accent) 85%, var(--fg));
+  border-color: color-mix(in srgb, var(--accent) 85%, var(--fg));
 }
 
 .btn-ghost {
@@ -229,8 +256,9 @@ h2 {
 }
 
 .btn-ghost:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 .btn-sq {
@@ -239,28 +267,51 @@ h2 {
 }
 
 /* ---------------------------------------------------------------
-   Cards, panels, chips
+   Surfaces
 --------------------------------------------------------------- */
-.card {
+.card,
+.panel {
+  position: relative;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 4px;
+}
+
+/* Corner tick: a hairline bracket that lights up on hover. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: -1px;
+  width: 14px;
+  height: 14px;
+  border-block-start: 1px solid var(--accent);
+  border-inline-start: 1px solid var(--accent);
+  border-start-start-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.card {
   transition:
     border-color 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .card:hover {
-  border-color: var(--gold);
-  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px -22px color-mix(in srgb, var(--accent) 70%, transparent);
 }
 
-.panel {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
+.card:hover::before {
+  opacity: 1;
 }
 
+/* ---------------------------------------------------------------
+   Tokens: chips, pills, badges
+--------------------------------------------------------------- */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -271,7 +322,7 @@ h2 {
   border-radius: 3px;
   border: 1px solid var(--line);
   color: var(--muted);
-  background: color-mix(in srgb, var(--bg2) 60%, transparent);
+  background: var(--bg2);
   white-space: nowrap;
 }
 
@@ -283,9 +334,9 @@ h2 {
   line-height: 1;
   padding: 8px 10px;
   border-radius: 3px;
-  border: 1px solid var(--line);
-  background: var(--gold-soft);
-  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  background: var(--accent-soft);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -294,18 +345,19 @@ h2 {
   align-items: center;
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 7px 10px;
   border-radius: 3px;
   border: 1px solid var(--line);
   color: var(--muted);
+  background: var(--bg2);
 }
 
-.badge-gold {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: var(--gold-soft);
+.badge-accent {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+  background: var(--accent-soft);
 }
 
 [dir="rtl"] .badge {
@@ -319,7 +371,6 @@ h2 {
 .ticker {
   background: var(--bg2);
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
 
@@ -327,8 +378,12 @@ h2 {
   display: flex;
   width: max-content;
   align-items: center;
-  padding-block: 14px;
+  padding-block: 13px;
   animation: ticker-scroll 40s linear infinite;
+}
+
+[dir="rtl"] .ticker-track {
+  animation-direction: reverse;
 }
 
 /* Every item carries its own trailing space so the duplicated list is
@@ -336,12 +391,8 @@ h2 {
 .ticker-item {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding-inline-end: 24px;
-}
-
-[dir="rtl"] .ticker-track {
-  animation-direction: reverse;
+  gap: 22px;
+  padding-inline-end: 22px;
 }
 
 @keyframes ticker-scroll {
@@ -365,17 +416,16 @@ h2 {
   -ms-overflow-style: none;
 }
 
+.dot {
+  width: 6px;
+  height: 6px;
+  flex: none;
+}
+
 /* External-link arrow: mirror it in RTL so it still points outward. */
 [dir="rtl"] .ext {
   display: inline-block;
   transform: scaleX(-1);
-}
-
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

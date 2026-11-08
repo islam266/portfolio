@@ -35,12 +35,12 @@ export default function Contact({
   };
 
   return (
-    <Section id="contact" kicker={d.k_contact} heading={d.h_contact}>
+    <Section id="contact" index={6} kicker={d.k_contact} heading={d.h_contact}>
       <p className="max-w-[60ch] leading-relaxed text-muted">{d.contact_p}</p>
 
       <a
         href={`mailto:${EMAIL}`}
-        className="serif ltr mt-8 inline-block text-[clamp(22px,4.4vw,40px)] leading-tight break-words transition-colors hover:text-gold"
+        className="display ltr mt-8 inline-block text-[clamp(22px,4.4vw,40px)] leading-tight break-words transition-colors hover:text-accent"
       >
         {EMAIL}
       </a>

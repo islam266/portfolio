@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 
-import { GOLD, INK, serifFont } from "@/lib/og-font";
+import { ACCENT, INK, displayFont } from "@/lib/og-font";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
 export default async function AppleIcon() {
-  const { family, data } = await serifFont();
+  const { family, data } = await displayFont();
 
   return new ImageResponse(
     (
@@ -18,7 +18,7 @@ export default async function AppleIcon() {
           alignItems: "center",
           justifyContent: "center",
           background: INK,
-          color: GOLD,
+          color: ACCENT,
           fontFamily: family,
           fontSize: 118,
           lineHeight: 1,
@@ -30,7 +30,7 @@ export default async function AppleIcon() {
     {
       ...size,
       fonts: [
-        { name: family, data, style: "normal", weight: 400 },
+        { name: family, data, style: "normal", weight: 700 },
       ],
     },
   );

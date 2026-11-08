@@ -13,7 +13,7 @@ function ProjectCard({ project }: { project: Project }) {
         {project.s}
       </p>
 
-      <h3 className="serif mt-4 text-[26px] leading-tight max-sm:text-[22px]">
+      <h3 className="display mt-4 text-[26px] leading-tight max-sm:text-[22px]">
         {project.t}
       </h3>
 
@@ -32,7 +32,7 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function Projects({ d }: { d: Dict }) {
   return (
-    <Section id="projects" kicker={d.k_proj} heading={d.h_proj}>
+    <Section id="projects" index={3} kicker={d.k_proj} heading={d.h_proj}>
       <ul className="grid grid-cols-2 gap-5 max-[820px]:grid-cols-1">
         {d.proj.map((project) => (
           <ProjectCard key={project.t} project={project} />

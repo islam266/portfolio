@@ -64,7 +64,7 @@ export default async function Page({
         <Ticker d={d} />
         <About d={d} />
 
-        <Section id="experience" kicker={d.k_exp} heading={d.h_exp}>
+        <Section id="experience" index={2} kicker={d.k_exp} heading={d.h_exp}>
           <ExperienceCarousel
             exp={d.exp}
             of={d.of}
@@ -75,7 +75,7 @@ export default async function Page({
 
         <Projects d={d} />
 
-        <Section id="flow" kicker={d.k_flow} heading={d.h_flow}>
+        <Section id="flow" index={4} kicker={d.k_flow} heading={d.h_flow}>
           <ProductionFlow
             flow={d.flow}
             note={d.fnote}
