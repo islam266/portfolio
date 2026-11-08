@@ -1,23 +1,16 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-import type { Locale } from "@/content/content";
-
-const FILES: Record<Locale, { family: string; file: string }> = {
-  en: { family: "DM Serif Display", file: "DMSerifDisplay-Regular.ttf" },
-  ar: { family: "IBM Plex Sans Arabic", file: "IBMPlexSansArabic-Regular.ttf" },
-};
-
 /**
- * Display faces vendored in /assets (both SIL OFL) so generated images — the
- * icons and the Open Graph card — render at build time without a network call.
- * Latin uses the site's serif (DM Serif Display); Arabic uses IBM Plex Sans
- * Arabic because Amiri's GSUB tables are not supported by the image renderer.
+ * DM Serif Display, vendored in /assets (SIL OFL), so the generated images —
+ * the icons and the Open Graph card — render in the site's display face at
+ * build time with no network call.
  */
-export async function serifFont(locale: Locale = "en") {
-  const { family, file } = FILES[locale];
-  const data = await readFile(join(process.cwd(), "assets", file));
-  return { family, data };
+export async function serifFont() {
+  const data = await readFile(
+    join(process.cwd(), "assets", "DMSerifDisplay-Regular.ttf"),
+  );
+  return { family: "DM Serif Display", data };
 }
 
 export const INK = "#0b1120";

@@ -53,6 +53,10 @@ Two small exceptions, both interface chrome rather than portfolio content:
 The e-mail address and LinkedIn URL are exported from `content.ts`
 (`EMAIL`, `LINKEDIN`).
 
+The Open Graph card is English on both locales. The image renderer behind
+`ImageResponse` lays glyphs out without the bidi algorithm, so Arabic comes
+out with its words in reverse order; an English card is the honest option.
+
 ### Adding a project screenshot later
 
 `src/components/Projects.tsx` has a commented `TODO: image hook` inside the
@@ -75,8 +79,8 @@ src/
   components/          one file per section, "use client" only where needed
   content/content.ts   all copy, both languages
   lib/                 site URL, UI labels, bidi helper, image fonts
-assets/                DM Serif Display + IBM Plex Sans Arabic (SIL OFL),
-                       used by the generated icons and OG card
+assets/                DM Serif Display (SIL OFL), used by the generated
+                       icons and the Open Graph card
 tests/qa.spec.ts       Playwright QA suite
 ```
 

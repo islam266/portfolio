@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { D, LOCALES, isLocale } from "@/content/content";
+import { D, LOCALES } from "@/content/content";
 import { GOLD, INK, LINE, PAPER, serifFont } from "@/lib/og-font";
 
 export const alt = "Islam Hamdi Ahmed — SAP PP Business Analyst";
@@ -11,16 +11,14 @@ export function generateStaticParams() {
   return LOCALES.map((locale) => ({ locale }));
 }
 
-export default async function OpengraphImage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale: raw } = await params;
-  const locale = isLocale(raw) ? raw : "en";
-  const d = D[locale];
-  const rtl = locale === "ar";
-  const { family, data } = await serifFont(locale);
+/**
+ * One card for both locales, in English. The image renderer lays glyphs out
+ * without the bidi algorithm, so Arabic comes out with its words in reverse
+ * order — an English card is the honest option until that changes.
+ */
+export default async function OpengraphImage() {
+  const { family, data } = await serifFont();
+  const d = D.en;
 
   return new ImageResponse(
     (
@@ -31,8 +29,6 @@ export default async function OpengraphImage({
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          alignItems: rtl ? "flex-end" : "flex-start",
-          textAlign: rtl ? "right" : "left",
           background: INK,
           padding: 72,
           fontFamily: family,
@@ -42,13 +38,7 @@ export default async function OpengraphImage({
           islam.hamdi
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: rtl ? "flex-end" : "flex-start",
-          }}
-        >
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <div
             style={{
               display: "flex",
@@ -77,7 +67,6 @@ export default async function OpengraphImage({
           style={{
             display: "flex",
             width: "100%",
-            justifyContent: rtl ? "flex-end" : "flex-start",
             borderTop: `1px solid ${LINE}`,
             paddingTop: 24,
             fontSize: 22,
