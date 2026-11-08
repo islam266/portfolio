@@ -27,8 +27,10 @@ npm run start
 ## Environment variable
 
 One variable, used for canonical URLs, hreflang alternates, `sitemap.xml`,
-`robots.txt` and the Open Graph card. It falls back to `http://localhost:3000`
-when unset, so local development needs no `.env`.
+`robots.txt` and the Open Graph card. It is optional: on Vercel the build falls
+back to `VERCEL_PROJECT_PRODUCTION_URL`, which Vercel injects automatically,
+and locally it falls back to `http://localhost:3000`. Set it explicitly once
+you have a custom domain.
 
 ```bash
 NEXT_PUBLIC_SITE_URL=https://YOUR-DOMAIN
