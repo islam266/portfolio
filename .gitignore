@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# keep the example env file tracked
+!.env.example
+
+# local QA artifacts (screenshots, reports)
+/qa
+
+# playwright
+/test-results
+/playwright-report
+/blob-report
