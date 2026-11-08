@@ -19,15 +19,41 @@ function MarkedName({ name }: { name: string }) {
 
 export default function Hero({ d }: { d: Dict }) {
   return (
-    <section className="wrap pt-16 pb-16 max-sm:pt-10 max-sm:pb-10">
+    <section className="wrap pt-16 pb-16 max-sm:pt-9 max-sm:pb-10">
       <div
         className={
           PHOTO
-            ? "grid grid-cols-[1.15fr_0.85fr] items-center gap-14 max-[900px]:grid-cols-1 max-[900px]:gap-10"
+            ? "flex items-center gap-16 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-9"
             : ""
         }
       >
-        <div>
+        {PHOTO ? (
+          <div className="relative order-2 shrink-0 max-[900px]:order-1">
+            <span
+              aria-hidden="true"
+              className="photo-blob"
+              style={{
+                insetBlockStart: 22,
+                insetBlockEnd: -22,
+                insetInlineStart: 28,
+                insetInlineEnd: -20,
+              }}
+            />
+            <div className="photo-frame relative w-[300px] max-[900px]:w-[210px]">
+              <Image
+                src={PHOTO.src}
+                alt={d.name}
+                width={PHOTO.width}
+                height={PHOTO.height}
+                priority
+                sizes="300px"
+                className="block h-auto w-full"
+              />
+            </div>
+          </div>
+        ) : null}
+
+        <div className="order-1 min-w-0 max-[900px]:order-2">
           <ul className="flex flex-wrap gap-2.5">
             {d.badges.map(([text, highlighted]) => (
               <li
@@ -39,11 +65,11 @@ export default function Hero({ d }: { d: Dict }) {
             ))}
           </ul>
 
-          <h1 className="mt-8 max-w-[15ch]">
+          <h1 className="mt-8 max-w-[14ch]">
             <MarkedName name={d.name} />
           </h1>
 
-          <p className="mt-7 max-w-[54ch] text-[17px] leading-[1.7] text-muted max-sm:text-[15px]">
+          <p className="mt-7 max-w-[52ch] text-[17px] leading-[1.7] text-muted max-sm:text-[15px]">
             {d.role}
           </p>
 
@@ -56,26 +82,6 @@ export default function Hero({ d }: { d: Dict }) {
             </a>
           </div>
         </div>
-
-        {PHOTO ? (
-          <div className="relative">
-            <span
-              aria-hidden="true"
-              className="photo-blob"
-              style={{ inset: "26px -22px -26px 34px" }}
-            />
-            <div className="photo-frame relative aspect-[4/5] w-full">
-              <Image
-                src={PHOTO.src}
-                alt={d.name}
-                fill
-                priority
-                sizes="(max-width: 900px) 92vw, 440px"
-                className="object-cover"
-              />
-            </div>
-          </div>
-        ) : null}
       </div>
 
       <ul className="mt-16 grid grid-cols-4 gap-4 max-[820px]:grid-cols-2 max-sm:mt-12">

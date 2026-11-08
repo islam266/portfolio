@@ -26,12 +26,18 @@ function resolveSiteUrl(): string {
 export const SITE_URL = resolveSiteUrl();
 
 /**
- * Portrait shown in the hero. Set this once the image file is in /public —
- * e.g. { src: "/portrait.jpg", width: 1200, height: 1500 }. While it is null
- * the hero renders as a single text column, with no placeholder.
+ * Portrait shown in the hero. Set to null to drop it and fall back to a
+ * single text column, with no placeholder.
+ *
+ * The current file is the 400x400 LinkedIn export, so the hero caps the
+ * portrait at 300px to avoid upscaling it. Replace it with a larger original
+ * and the cap in Hero.tsx can go up.
  */
-export const PHOTO: { src: string; width: number; height: number } | null =
-  null;
+export const PHOTO: { src: string; width: number; height: number } | null = {
+  src: "/portrait.png",
+  width: 400,
+  height: 400,
+};
 
 export const META: Record<Locale, { title: string; ogLocale: string }> = {
   en: {
